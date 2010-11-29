@@ -1,0 +1,1 @@
+Database table {$table} for model {$model} was not found.
