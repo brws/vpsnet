@@ -1,7 +1,7 @@
 <div class="input date">
   {if $label!==false}
-  {if isset($data[$model][$field][date])}
-  {assign var=date value=$data[$model][$field][date]}
+  {if isset($data[$model][$field]['date'])}
+  {assign var=date value=$data[$model][$field]['date']}
   {else}
   {assign var=date value=$data[$model][$field]}
   {/if}

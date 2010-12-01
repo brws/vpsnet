@@ -40,7 +40,23 @@
   {$form->input('Ordertype.0', array(type="select", options=$ordertypes, label="Work Order", empty="-- Select Workorder 1 --"))}
   {$form->input('Ordertype.1', array(type="select", options=$ordertypes, label="Work Order", empty="-- Select Workorder 2 --"))}
   {$form->input('Addon', array(label="Addons", multiple="checkbox"))}
-  {include "../clever/calendar.tpl" disabled=$disabledtf label="Date Required" label2="Time Required" field="datetime_required" model="Workorder"}
+
+  {if $role->is($role->VALET_STAFF)}
+    <div class="input">
+    <br />
+    <label>Date Required</label>
+    <span style="margin: 10px;">{date_format $data['Workorder']['datetime_required']}</span>
+    </div>
+    <div class="input">
+    <label>Time Required</label>
+    <span style="margin: 10px;">{date_format $data['Workorder']['datetime_required'] "%r"}</span>
+    </div>
+    <div style="visibility: hidden">
+    {include "../clever/calendar.tpl" disabled=$disabledtf label="Date Required" label2="Time Required" field="datetime_required" model="Workorder"}
+    </div>
+  {else}
+  	{include "../clever/calendar.tpl" disabled=$disabledtf label="Date Required" label2="Time Required" field="datetime_required" model="Workorder"}
+  {/if}
 </div>
 
 <div class="input step">

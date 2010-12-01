@@ -239,7 +239,7 @@ class WorkordersController extends AppController {
 
     $this->paginate = array(
       'order' => array(
-        'Workorder.datetime_required ASC'
+        'Workorder.datetime_required DESC',
       ),
 
       'conditions' => array(
@@ -275,7 +275,6 @@ class WorkordersController extends AppController {
         $this->paginate['conditions']['or'][] = array('Workorder.datetime_required BETWEEN DATE(?) AND DATE(?)' => array($this->data['Filters']['datetime_required_from'], $this->data['Filters']['datetime_required_to']));
       }
     } else {
-	die('dieeee');
       $this->paginate['conditions']['or'][] = array(
         'DATE(Workorder.created)' => date('Y-m-d'),
         'DATE(Workorder.datetime_required)' => date('Y-m-d'),
@@ -289,6 +288,9 @@ class WorkordersController extends AppController {
     if (!empty($this->data['Filters']['Status'])) {
       if ($this->data['Filters']['Status'] == 5) $this->data['Filters']['Status'] = 0;
       $this->paginate['conditions'][] = array('Workorder.status_id' => $this->data['Filters']['Status']);
+    } else {
+      $this->paginate['conditions']['or'][] = array('Workorder.status_id' => 0);
+      $this->paginate['conditions']['or'][] = array('Workorder.status_id > ' => 2);
     }
 
     if (!empty($this->data['Filters']['User'])) {
