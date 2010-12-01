@@ -1,2 +1,5 @@
 tmp/dwoo/compile/*
 !tmp/dwoo/compile/empty
+.buildpath
+.project
+.settings
