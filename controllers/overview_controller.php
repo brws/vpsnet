@@ -249,6 +249,12 @@ class OverviewController extends AppController {
 
     $this->setData();
   }
+  
+  function print_report($m = null, $y = null) {
+    $this->layout = 'report';
+    $this->all($y . '-' . $m . '-1', true);
+  }
+  
   /*
   <option value="last_month">Last Month</option>
   <option value="last_week">Last Week</option>
@@ -437,25 +443,44 @@ class OverviewController extends AppController {
     $this->render('all');
   }
 
-  function all($date = null) {
+  function all($date = null, $to = null) {
     $dater = explode('-', $date);
     $this->set('month', $dater[1]);
     $this->set('day', $dater[2]);
     $this->set('year', $dater[0]);
+    
+    if ($to == true) {
+      $this->paginate = array(
+        'order' => array(
+          'Workorder.datetime_required ASC'
+        ),
+  
+        'conditions' => array(
+          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.status_id' => 1,
+          'MONTH(Workorder.created)' => $dater[1],
+          'YEAR(Workorder.created)' => $dater[0],
+        ),
+  
+        'limit' => 2000,
+      );
+    } else {
+      $this->paginate = array(
+        'order' => array(
+          'Workorder.datetime_required ASC'
+        ),
+  
+        'conditions' => array(
+          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.status_id' => 1,
+          'DATE(Workorder.created)' => $date
+        ),
+  
+        'limit' => 50,
+      );
+    }
 
-    $this->paginate = array(
-      'order' => array(
-        'Workorder.datetime_required ASC'
-      ),
-
-      'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
-        'Workorder.status_id' => 1,
-        'DATE(Workorder.created)' => $date
-      ),
-
-      'limit' => 50,
-    );
+    
 
     $this->User->recursive = -1;
 
