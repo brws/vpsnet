@@ -4,13 +4,15 @@
 <table border="0" cellpadding="0" cellspacing="1" id="front">
   <thead>
     <tr>
-      <th>{$paginator->sort("Dept", "Department.name")}</th><th>{$paginator->sort("Authorised By", "AuthorisedByUser.username")}</th><th>Work Order</th><th>Addon</th><th>Notes</th>
+      <th>{$paginator->sort("Dept", "Department.name")}</th><th>{$paginator->sort("Authorised By", "AuthorisedByUser.username")}</th><th>Work Order</th><th>Addon</th><th style="text-align: center;"><img src="/img/mailgray.png" title="Message"></th>
       <th>Car</th><th>{$paginator->sort("Key / Tag", "Workorder.key")}</th><th>{$paginator->sort("Date Required", "Workorder.datetime_required")}</th>
       <th>{$paginator->sort("Date Created", "Workorder.created")}</th><th>{$paginator->sort("Status", "Status.name")}</th>
     </tr>
   </thead>
   <tbody>
     {foreach from=$workorders item=workorder}
+      {assign var="read" value=cat("Workorder.", $workorder.Workorder.id, ".read")}
+      
       <tr class="{cycle values=array("odd", "even")} {if strtotime($workorder.Workorder.datetime_required) < strtotime('now')}overdue{/if} color{$workorder.Workorder.status_id}" onclick="location.href='/workorders/view/{$workorder.Workorder.id}';">
         <td>{$workorder.Department.name}</td>
         <td>{ucwords $workorder.AuthorisedByUser.firstname} {ucwords $workorder.AuthorisedByUser.surname}</td>
@@ -22,7 +24,7 @@
         </td>
         <td>{assign var=addonl value=""}{foreach from=$workorder.Addon item=addon}{assign var=addons value="YES"}{assign var=addonl value=$addonl|cat:$addon.name}{if !$dwoo.foreach.default.last}{assign var=addonl value=$addonl|cat:", "}{/if}{foreachelse}{assign var=addons value="NO"}{/foreach}<span title="{$addonl}">{$addons}</span>
         </td>
-        <td><span title="{$workorder.Workorder.notes}">{if $workorder.Workorder.notes}READ{else}NONE{/}</span></td>
+        <td>{if $workorder.Workorder.notes == $session->read($read)}<img src="/img/mailgray.png" title="No unread messages">{else}<img src="/img/mail.png" title="Unread messages!">{/}</td>
         <td><strong>{if $workorder.Car.registration}{$workorder.Car.registration}{else}{$workorder.Car.chassis}{/if}</strong>, {$workorder.Car.colour}<br />
         {$workorder.Car.make} {$workorder.Car.variant}</td>
         <td>{$workorder.Workorder.key}</td>

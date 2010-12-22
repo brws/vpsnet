@@ -5,7 +5,7 @@
 class OverviewController extends AppController {
   public $helpers = array('Ajax', 'Js' => array('Prototype'), 'Paginator');
   public $components = array('RequestHandler', 'Session');
-  var $uses = array('Workorder', 'User', 'Role');
+  var $uses = array('Workorder', 'User', 'Role', 'FixedCost');
 
   function index() {
     if (!$this->Role->atleast($this->Role->DEALER_ADMIN)) {
@@ -475,7 +475,7 @@ class OverviewController extends AppController {
           'Workorder.status_id' => 1,
           'DATE(Workorder.created)' => $date
         ),
-  
+  					
         'limit' => 50,
       );
     }
@@ -508,6 +508,9 @@ class OverviewController extends AppController {
     $workorders = $this->paginate('Workorder');
 
     $this->set('workorders', $workorders);
+    
+    $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->Session->read('Auth.User.location_id'))));
+    $this->set('fixedcosts', $fixedcosts);
   }
 }
 

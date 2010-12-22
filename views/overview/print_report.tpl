@@ -47,6 +47,19 @@
     {/foreach}
   </tbody>
   <thead>
+    <th colspan="9" align="left">Fixed Costs</th>
+  </thead>
+  <tbody>
+    {foreach from=$fixedcosts item=cost}
+      <tr>
+        <td colspan="7">&nbsp;{$cost.FixedCost.name}</td>
+        <td>&pound;{number_format $cost.FixedCost.cost 2}</td><td class="right">&pound;{number_format $cost.FixedCost.charge 2}</td>
+      </tr>
+      {$totalcost+=$cost.FixedCost.cost}
+      {$totalcharge+=$cost.FixedCost.charge}
+    {/}
+  </tbody>
+  <thead>
     <th colspan="7">&nbsp;</th>
     <th>Total Cost</th><th>Total Charge</th>
   </thead>

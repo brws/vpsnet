@@ -1,9 +1,9 @@
 <?php
 
 class WorkordersController extends AppController {
-  public $helpers = array('Ajax', 'Js' => array('Prototype'), 'Paginator');
+  public $helpers = array('Ajax', 'Js' => array('Prototype'), 'Paginator', 'Session');
   public $components = array('RequestHandler', 'Session');
-  public $uses = array('Workorder', 'Car', 'User', 'Ordertype');
+  public $uses = array('Workorder', 'Car', 'User', 'Ordertype', 'Message', 'FixedCost');
 
   function beforeFilter() {
     parent::beforeFilter();
@@ -85,6 +85,16 @@ class WorkordersController extends AppController {
           if (date_sensible($this->data['Workorder']['datetime_required']) === true) {
             if ($this->Workorder->saveAll($this->data, array('validate'=>'first', 'atomic' => true))) {
               $this->Session->setFlash('Work Order Saved');
+              
+              $user = $this->Auth->user();
+              
+              $data['Message']['message'] = $this->data['Workorder']['notes'];
+              $data['Message']['created'] = date('Y-m-d H:i:s');
+              $data['Message']['workorder_id'] = $this->Workorder->id;
+              $data['Message']['user_id'] = $user['User']['id'];
+              
+              $this->Message->save($data);
+              
               $this->redirect(array('controller' => 'workorders', 'action' => 'index'));
               exit;
             } else {
@@ -196,12 +206,64 @@ class WorkordersController extends AppController {
 
     $this->render('ajax/update_select');
   }
+  
+  function update_messages() {
+    $this->autoRender = false;
+    $this->layout = 'ajax';
+    
+    if (isset($this->data)) {
+      if (isset($this->data['Message'])) {
+        if (strlen($this->data['Message']['message']) > 0) {
+          $user = $this->Auth->user();
+          
+          $this->data['Message']['created'] = date('Y-m-d H:i:s');
+          $this->data['Message']['workorder_id'] = $this->data['Workorder']['id'];
+          $this->data['Message']['user_id'] = $user['User']['id'];
+          
+          $this->Message->save($this->data);
+          
+          $this->Workorder->id = $this->data['Workorder']['id'];
+          $this->Workorder->saveField('notes', $this->data['Message']['created']);
+        }
+      }
+    }
+    
+    $messages = $this->Message->getFromWorkorder($this->data['Workorder']['id']);
+    $this->set('messages', $messages);
+    $this->render('ajax/messages');
+  }
+  
+  function messagesset() {
+    $this->layout = '';
+    $this->autoRender = false;
+    
+    $this->Workorder->recursive = -1;
+    $workorders = $this->Workorder->find('all');
+    
+    $data = array();
+    foreach ($workorders as $workorder) {
+      if (strlen($workorder['Workorder']['notes']) > 5) {
+        $data[] = array(
+          'created' => date('Y-m-d H:i:s'),
+          'workorder_id' => $workorder['Workorder']['id'],
+          'user_id' => $workorder['Workorder']['updated_by'] > 0 ? $workorder['Workorder']['updated_by'] : 1,
+          'message' => $workorder['Workorder']['notes']
+        );
+      }
+    }
+    
+    if ($this->Message->saveAll($data)) {
+      print('All saved');
+    } else {
+      print_r($this->Message->invalidFields());
+    }
+  }
 
   function update_car_reg() {
     $this->autoRender = false;
     $this->layout = 'ajax';
-
     $cars = array();
+    
     $cars = $this->Workorder->find('all', array(
       'recursive' => 1,
       'conditions' => array(
@@ -218,16 +280,16 @@ class WorkordersController extends AppController {
   function update_car_cha() {
     $this->autoRender = false;
     $this->layout = 'ajax';
-
+    
     $cars = array();
-
+    
     $cars = $this->Workorder->find('all', array(
       'recursive' => 1,
       'conditions' => array(
         'Car.chassis' => str_replace(' ', '', $this->data['Car']['chassis'])
       )
     ));
-
+    
     $this->set('cars', $cars);
     $this->set('cars_json', json_encode($cars));
 
@@ -393,9 +455,9 @@ class WorkordersController extends AppController {
           case 3: // cancel work order
             $new_status = 2;
           break;
-	  default:
-		$new_status = -1;
-	  break;
+      	  default:
+            $new_status = -1;
+      	  break;
         }
       }
 
@@ -404,7 +466,7 @@ class WorkordersController extends AppController {
       $this->saveWorkorder($new_status > 0 ? $new_status : $this->data['Workorder']['status_id']);
     }
 
-     $conditions = array(
+    $conditions = array(
       'conditions' => array(
         'Workorder.id' => $id
       ),
@@ -412,7 +474,7 @@ class WorkordersController extends AppController {
       'limit' => 1,
 
       'joins' => array(
-        array(
+          array(
           'table' => 'ordertypes_workorders',
           'alias' => 'OrdertypesWorkorder',
           'type' => 'inner',
@@ -432,12 +494,14 @@ class WorkordersController extends AppController {
     $this->setData();
 
     $workorders = $this->Workorder->find('all', $conditions);
-
+    
     $this->data = $workorders[0];
-
+    $messages = $this->Message->getFromWorkorder($this->data['Workorder']['id']);
+    $this->Session->write('Workorder.' . $workorders[0]['Workorder']['id'] . '.read', $workorders[0]['Workorder']['notes']);
+    $this->set('messages', $messages);
     $this->set('data', $this->data);
   }
-
+  
   function setup() {
     $ordertypes = $this->Workorder->Ordertype->find('all', array(
       'order' => array('Ordertype.order'),
@@ -447,7 +511,7 @@ class WorkordersController extends AppController {
         'Ordertype.location_id' => $this->Session->read('Auth.User.location_id')
       )
     ));
-
+    
     $departments = $this->Workorder->Department->find('all', array(
       'order' => array('Department.order'),
       'recursive' => -1,
@@ -465,8 +529,17 @@ class WorkordersController extends AppController {
         'Addon.location_id' => $this->Session->read('Auth.User.location_id')
       )
     ));
+        
+    $fixedcosts = $this->FixedCost->find('all', array(
+      'order' => array('FixedCost.order'),
+      'recursive' => -1,
+      'conditions' => array(
+        'FixedCost.hidden NOT' => 1,
+        'FixedCost.location_id' => $this->Session->read('Auth.User.location_id')
+      )
+    ));
 
-    $this->set(compact('addons', 'departments', 'ordertypes'));
+    $this->set(compact('addons', 'departments', 'ordertypes', 'fixedcosts'));
   }
 
   function global_setup() {

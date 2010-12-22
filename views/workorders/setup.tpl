@@ -53,7 +53,7 @@
     {/for}
   </table>
   {$form->end("Save Work Orders")}
-<h3>Setup Addons</h3>
+  <h3>Setup Addons</h3>
   {$form->create("Addon")}
   <table border="0" cellspacing="0" cellpadding="0">
     <tr><th>Addon Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>&nbsp;</th></tr>
@@ -69,6 +69,23 @@
     {/for}
   </table>
   {$form->end("Save Addons")}
+  
+  <h3>Setup Fixed Costs</h3>
+  {$form->create("FixedCost")}
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tr><th>Fixed Cost Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>&nbsp;</th></tr>
+    {for i 0 9}
+      <tr>
+        <td>{$form->input(cat("FixedCost." $i ".id"), array(value=$fixedcost[$i].FixedCost.id))}
+            {$disabled=isset($fixedcosts[$i])}
+            {$form->input(cat("FixedCost." $i ".name"), array(value=$fixedcosts[$i].FixedCost.name))}</td>
+        <td>{$form->input(cat("FixedCost." $i ".charge"), array(value=$fixedcosts[$i].FixedCost.charge, disabled=$disabled))}</td>
+        <td>{$form->input(cat("FixedCost." $i ".cost"), array(value=$fixedcosts[$i].FixedCost.cost))}{$form->input(cat("FixedCost." $i ".order"), array(style="display: none", value=$i))}</td>
+        <td>{if isset($fixedcosts[$i])}<a href="/fixedcosts/delete/{$fixedcosts[$i].FixedCost.id}" title="Delete {$fixedcosts[$i].FixedCost.name}"><img src="/img/delete.png" /></a>{/if}</td>
+      </tr>
+    {/for}
+  </table>
+  {$form->end("Save Fixed Costs")}
 </div>
 
 <div class="departs">

@@ -921,3 +921,28 @@ input.date {
     padding-bottom: 0px;
 }
 
+.messages {
+  border: 1px solid #acacac;
+  background: #ccc;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.messages .date, .messages .from, .messages .text {
+  padding: 3px;
+}
+
+.messages .date {
+  display: block;
+  font-size: 9px;
+}
+
+.messages .text {
+  background: #fff;
+}
+
+#msgrpl {
+  height: 175px;
+  padding-right: 10px;
+  overflow-y: scroll;
+}

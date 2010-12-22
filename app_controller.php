@@ -30,6 +30,7 @@
  * @package       cake
  * @subpackage    cake.app
  */
+
 class AppController extends Controller {
   public $view = 'Dwoo';
   public $components = array('Auth', 'Session');

@@ -29,6 +29,19 @@
       jQuery('input[type=checkbox]').attr('disabled', 'disabled');
     {/}
   });
+  
+  function send_click() {
+    jQuery.post('/workorders/update_messages', {
+      data: {
+        'Workorder': { id: {$data['Workorder']['id']} },
+        'Message': { message: jQuery('#sendmessage').val() }
+      }
+    }, function(data, status) {
+      jQuery('#sendmessage').val('');
+      jQuery('#msgrpl').html(data);
+      console.log(data, status);
+    });
+  }
 </script>
 {$disabled=""}
 {$disabledtf=false}
@@ -76,7 +89,23 @@
 <div class="input step">
   <span class="title">Extra Instructions And Notes</span>
   {$form->input('Workorder.department_id', array(disabled=$disabled))}
-  {$form->input('notes')}
+  <div class="input textarea" style="text-align: right">
+    <label style="display: block; text-align: left">Send Message</label>
+    <textarea id="sendmessage"></textarea>
+    <button id="send" onclick="send_click(); return false;" style="margin-top: 5px;">Send</button>
+  </div>
+  <div id="messages" class="input textarea">
+    <label>Messages</label>
+    <div id="msgrpl">
+      {foreach from=$messages item=message}
+        <div class="messages"><span class="from">{$message.User.firstname} {$message.User.surname}</span> <span class="date">{$message.Message.created}</span>
+          <div class="text">{$message.Message.message}</div>
+        </div>
+      {else}
+        No messages
+      {/}
+    </div>
+  </div>  
   {$form->input('Workorder.status_id', array(type=hidden))}
   <div class="input text ">
     <label>Current Status</label><div style="padding: 4px" class="{if strtotime($data.Workorder.datetime_required) < strtotime('now')}overdue{/if} color{$data.Workorder.status_id}" style="float: left;">

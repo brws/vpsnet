@@ -9,5 +9,13 @@ class DATABASE_CONFIG {
 		'password' => 'root',
 		'database' => 'vpsnet',
 	);
+
+	var $defaultb = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => 'm1001rld',
+		'database' => 'vpsnet',
+	);
 }
-?>
