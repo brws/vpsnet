@@ -87,6 +87,7 @@
 </div>
 
 <div class="input step">
+  {$form->input('notes', array(type="hidden"))}
   <span class="title">Extra Instructions And Notes</span>
   {$form->input('Workorder.department_id', array(disabled=$disabled))}
   <div class="input textarea" style="text-align: right">
