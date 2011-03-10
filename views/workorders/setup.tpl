@@ -81,7 +81,7 @@
             {$form->input(cat("FixedCost." $i ".name"), array(value=$fixedcosts[$i].FixedCost.name))}</td>
         <td>{$form->input(cat("FixedCost." $i ".charge"), array(value=$fixedcosts[$i].FixedCost.charge, disabled=$disabled))}</td>
         <td>{$form->input(cat("FixedCost." $i ".cost"), array(value=$fixedcosts[$i].FixedCost.cost))}{$form->input(cat("FixedCost." $i ".order"), array(style="display: none", value=$i))}</td>
-        <td>{if isset($fixedcosts[$i])}<a href="/fixedcosts/delete/{$fixedcosts[$i].FixedCost.id}" title="Delete {$fixedcosts[$i].FixedCost.name}"><img src="/img/delete.png" /></a>{/if}</td>
+        <td>{if isset($fixedcosts[$i])}<a href="/fixed_costs/delete/{$fixedcosts[$i].FixedCost.id}" title="Delete {$fixedcosts[$i].FixedCost.name}"><img src="/img/delete.png" /></a>{/if}</td>
       </tr>
     {/for}
   </table>

@@ -1,7 +1,7 @@
 <?php
 class DATABASE_CONFIG {
 
-	var $default = array(
+	var $defaultb = array(
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
@@ -10,7 +10,7 @@ class DATABASE_CONFIG {
 		'database' => 'vpsnet',
 	);
 
-	var $defaultb = array(
+	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
 		'host' => 'localhost',
