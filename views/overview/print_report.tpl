@@ -52,13 +52,13 @@
   <tbody>
     {foreach from=$fixedcosts item=cost}
       {if $cost.FixedCost.period == 'weekly'}
-        {$weeks=cal_days_in_month(CAL_GREGORIAN, $month, $year)}
+        {$weeks=cal_days_in_month(0, $month, $year)}
         {$weeks=$weeks/7}
         {$cost.FixedCost.cost=$cost.FixedCost.cost*$weeks}
       {/if}
       
       {if $cost.FixedCost.period == 'daily'}
-        {$days=cal_days_in_month(CAL_GREGORIAN, $month, $year)}
+        {$days=cal_days_in_month(0, $month, $year)}
         {$cost.FixedCost.cost=$cost.FixedCost.cost*$days}
       {/if}
       
