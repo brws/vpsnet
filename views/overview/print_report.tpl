@@ -55,14 +55,14 @@
     
       {if $cost.FixedCost.period == 'weekly'}
         {$weeks=$days/7}
-        {$cost.FixedCost.cost=$cost.FixedCost.cost*$weeks}
+        {$cost.FixedCost.charge=$cost.FixedCost.charge*$weeks}
       {/if}
       
       {if $cost.FixedCost.period == 'daily'}
-        {$cost.FixedCost.cost=$cost.FixedCost.cost*$days}
+        {$cost.FixedCost.charge=$cost.FixedCost.charge*$days}
       {/if}
       
-      {$cost.FixedCost.cost=$cost.FixedCost.cost*$cost.FixedCost.timesperperiod}
+      {$cost.FixedCost.charge=$cost.FixedCost.charge*$cost.FixedCost.timesperperiod}
       <tr>
         <td colspan="7">&nbsp;{$cost.FixedCost.name} ({$cost.FixedCost.period})</td>
         <td>&pound;{number_format $cost.FixedCost.cost 2}</td><td class="right">&pound;{number_format $cost.FixedCost.charge 2}</td>
