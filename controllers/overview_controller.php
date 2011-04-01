@@ -512,6 +512,10 @@ class OverviewController extends AppController {
     
     $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->Session->read('Auth.User.location_id'))));
     $this->set('fixedcosts', $fixedcosts);
+    
+        $vat = $this->VAT->find('first', array('conditions' => array('VAT.id' => 1))); 
+    
+    $this->set(array('vat' => $vat['VAT']['value']));
   }
 }
 
