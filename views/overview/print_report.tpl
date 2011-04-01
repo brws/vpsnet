@@ -52,6 +52,8 @@
   <tbody>
     {foreach from=$fixedcosts item=cost}
       {$days=cal_days_in_month(0, $month, $year)}
+      
+      {$origcharge=$cost.FixedCost.charge}
     
       {if $cost.FixedCost.period == 'weekly'}
         {$weeks=$days/7}

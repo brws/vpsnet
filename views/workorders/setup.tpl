@@ -76,7 +76,7 @@
     <tr><th>Fixed Cost Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>Period</th><th>Repeated / Period</th><th>&nbsp;</th></tr>
     {for i 0 9}
       <tr>
-        <td>{$form->input(cat("FixedCost." $i ".id"), array(value=$fixedcost[$i].FixedCost.id))}
+        <td>{$form->input(cat("FixedCost." $i ".id"), array(value=$fixedcosts[$i].FixedCost.id))}
             {$disabled=isset($fixedcosts[$i])}
             {$form->input(cat("FixedCost." $i ".name"), array(value=$fixedcosts[$i].FixedCost.name))}</td>
         <td>{$form->input(cat("FixedCost." $i ".charge"), array(value=$fixedcosts[$i].FixedCost.charge, disabled=$disabled))}</td>

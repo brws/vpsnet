@@ -3,7 +3,7 @@
 class WorkordersController extends AppController {
   public $helpers = array('Ajax', 'Js' => array('Prototype'), 'Paginator', 'Session');
   public $components = array('RequestHandler', 'Session');
-  public $uses = array('Workorder', 'Car', 'User', 'Ordertype', 'Message', 'FixedCost');
+  public $uses = array('Workorder', 'Car', 'User', 'Ordertype', 'Message', 'FixedCost', 'VAT');
 
   function beforeFilter() {
     parent::beforeFilter();
