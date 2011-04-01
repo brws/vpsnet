@@ -101,7 +101,7 @@
       <td colspan="7">&nbsp;</td>
       {$tcpc=$totalcharge/100}
       {$vatc=$tcpc*$vat}
-      <td>&nbsp;</td><td class="right">{number_format $vatc 2} @ {$vat}%</td>
+      <td>&nbsp;</td><td class="right">&pound;{number_format $vatc 2} @ {$vat}%</td>
       {$totalcharge=$totalcharge+$vatc}
     </tr>
   </tbody>
