@@ -51,20 +51,20 @@
   </thead>
   <tbody>
     {foreach from=$fixedcosts item=cost}
+      {$days=cal_days_in_month(0, $month, $year)}
+    
       {if $cost.FixedCost.period == 'weekly'}
-        {$weeks=cal_days_in_month(0, $month, $year)}
-        {$weeks=$weeks/7}
+        {$weeks=$days/7}
         {$cost.FixedCost.cost=$cost.FixedCost.cost*$weeks}
       {/if}
       
       {if $cost.FixedCost.period == 'daily'}
-        {$days=cal_days_in_month(0, $month, $year)}
         {$cost.FixedCost.cost=$cost.FixedCost.cost*$days}
       {/if}
       
       {$cost.FixedCost.cost=$cost.FixedCost.cost*$cost.FixedCost.timesperperiod}
       <tr>
-        <td colspan="7">&nbsp;{$cost.FixedCost.name}</td>
+        <td colspan="7">&nbsp;{$cost.FixedCost.name} ({$cost.FixedCost.period})</td>
         <td>&pound;{number_format $cost.FixedCost.cost 2}</td><td class="right">&pound;{number_format $cost.FixedCost.charge 2}</td>
       </tr>
       {$totalcost+=$cost.FixedCost.cost}
