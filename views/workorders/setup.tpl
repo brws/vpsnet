@@ -73,7 +73,7 @@
   <h3>Setup Fixed Costs</h3>
   {$form->create("FixedCost")}
   <table border="0" cellspacing="0" cellpadding="0">
-    <tr><th>Fixed Cost Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>&nbsp;</th></tr>
+    <tr><th>Fixed Cost Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>Period</th><th>Repeated / Period</th><th>&nbsp;</th></tr>
     {for i 0 9}
       <tr>
         <td>{$form->input(cat("FixedCost." $i ".id"), array(value=$fixedcost[$i].FixedCost.id))}
@@ -81,6 +81,18 @@
             {$form->input(cat("FixedCost." $i ".name"), array(value=$fixedcosts[$i].FixedCost.name))}</td>
         <td>{$form->input(cat("FixedCost." $i ".charge"), array(value=$fixedcosts[$i].FixedCost.charge, disabled=$disabled))}</td>
         <td>{$form->input(cat("FixedCost." $i ".cost"), array(value=$fixedcosts[$i].FixedCost.cost))}{$form->input(cat("FixedCost." $i ".order"), array(style="display: none", value=$i))}</td>
+        <td>
+          <div class="input select">
+            <select name="data[FixedCost][{$i}][period]">
+              <option {if $fixedcosts[$i].FixedCost.period == "daily"}selected="selected" {/if}value="daily">Daily</option>
+              <option {if $fixedcosts[$i].FixedCost.period == "weekly"}selected="selected" {/if}value="weekly">Weekly</option>
+              <option {if $fixedcosts[$i].FixedCost.period == "monthly"}selected="selected" {/if}value="monthly">Monthly</option>
+            </select>
+          </div>
+        </td>
+        <td>
+          {$form->input(cat("FixedCost." $i ".timesperperiod"), array(value=$fixedcosts[$i].FixedCost.timesperperiod, style="width: 40px;"))} time(s)
+        </td>
         <td>{if isset($fixedcosts[$i])}<a href="/fixed_costs/delete/{$fixedcosts[$i].FixedCost.id}" title="Delete {$fixedcosts[$i].FixedCost.name}"><img src="/img/delete.png" /></a>{/if}</td>
       </tr>
     {/for}

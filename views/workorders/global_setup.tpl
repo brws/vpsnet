@@ -38,6 +38,13 @@
 
 <div class="setups">
   <h3>Setup Global Workorders</h3>
+  <form target="/workorders/settax" method="post">
+    <div class="input text">
+      <label for="vat">VAT amount</label><input type="text" id="vat" value="{$vdata.vat}" name="data[vat]" />
+    </div>
+    <div class="submit"><input type="submit" value="Save VAT Amount"></div>
+  </form>
+  <!--
   {$form->create("Ordertype")}
   <table border="0" cellspacing="0" cellpadding="0">
     <tr><th>Work Order Description</th><th>Charge For Customer (£)</th><th>Internal Cost (£)</th><th>&nbsp;</th></tr>
@@ -86,4 +93,5 @@
   </table>
   {$form->end("Save Departments")}
 </div>
+-->
 

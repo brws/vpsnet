@@ -818,12 +818,12 @@ table#front tr td {
   cursor: pointer;
 }
 
-.color1 td.status, .color1 { /* completed */
+.color1 td, .color1 { /* completed */
   background: #6de54d !important;
   color: #000 !important;
 }
 
-.color2 td.status { /* cancelled */
+.color2 td { /* cancelled */
   background: #000 !important;
   color: #fff !important;
 }
@@ -837,23 +837,23 @@ table#front tr td {
   color: #fff;
 }
 
-.color3 td.status, .color3 { /* in progress */
+.color3 td, .color3 { /* in progress */
   background: #0096ff !important;
 }
 
-.color4 td.status, .color4 { /* urgent */
+.color4 td, .color4 { /* urgent */
   background: #ffc600 !important;
   color: #000 !important;
 }
 
-.overdue td.status {
+.overdue td {
   background: #af1616;
   color: #fff;
 }
 
-table tr.odd td {
+/*table tr.odd td {
     background: #e5e5e5;
-}
+}*/
 
 table#key .overdue {
   background: #af1616 !important;

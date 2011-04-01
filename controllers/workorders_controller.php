@@ -301,7 +301,7 @@ class WorkordersController extends AppController {
 
     $this->paginate = array(
       'order' => array(
-        'Workorder.datetime_required DESC',
+        'Workorder.datetime_required ASC',
       ),
 
       'conditions' => array(
@@ -571,6 +571,19 @@ class WorkordersController extends AppController {
     ));
 
     $this->set(compact('addons', 'departments', 'ordertypes'));
+    
+    $vat = $this->VAT->find('first', array('conditions' => array('VAT.id' => 1))); 
+    
+    $this->set('vdata', array('vat' => $vat['VAT']['value']));
+  }
+}
+
+function settax() {
+  if ($this->data) {
+    $vat = $this->VAT->read(null, 1);
+    $vat['VAT']['value'] = $this->data['vat'];
+    $this->VAT->save($vat['VAT']);
+    header('Location: /workorders/global_setup');
   }
 }
 

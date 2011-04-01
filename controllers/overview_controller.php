@@ -330,7 +330,7 @@ class OverviewController extends AppController {
 
     $this->paginate = array(
       'order' => array(
-        'Workorder.created DESC'
+        'Workorder.datetime_required ASC'
       ),
 
       'conditions' => array(
@@ -452,7 +452,8 @@ class OverviewController extends AppController {
     if ($to == true) {
       $this->paginate = array(
         'order' => array(
-          'Workorder.datetime_required ASC'
+          'Workorder.datetime_required ASC',
+          'Workorder.department_id ASC'
         ),
   
         'conditions' => array(
