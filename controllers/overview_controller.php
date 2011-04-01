@@ -5,7 +5,7 @@
 class OverviewController extends AppController {
   public $helpers = array('Ajax', 'Js' => array('Prototype'), 'Paginator');
   public $components = array('RequestHandler', 'Session');
-  var $uses = array('Workorder', 'User', 'Role', 'FixedCost');
+  var $uses = array('Workorder', 'User', 'Role', 'FixedCost', 'VAT');
 
   function index() {
     if (!$this->Role->atleast($this->Role->DEALER_ADMIN)) {
