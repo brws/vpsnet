@@ -99,7 +99,8 @@
   <tbody>
     <tr>
       <td colspan="7">&nbsp;</td>
-      <td>&nbsp;</td><td class="right">{$vat}</td>
+      <td>&nbsp;</td><td class="right">{($totalcharge/100)*$vat} @ {$vat}%</td>
+      {$totalcharge+=($totalcharge/100)*$vat}
     </tr>
   </tbody>
   <thead>
