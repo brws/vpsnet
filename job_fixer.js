@@ -15,6 +15,17 @@ var pricegroups = [
     ]
   },
   {
+    location_id: 5,
+    ordertypes: [
+      {oldtype: 20, newtype: 84}, // A1
+      {oldtype: 21, newtype: 85}, // C1
+      {oldtype: 22, newtype: 86}, // D1
+      {oldtype: 23, newtype: 87}, // D4
+      {oldtype: 50, newtype: 89}, // FA1
+      {oldtype: 42, newtype: 88} // SV1 
+    ]
+  },
+  {
     location_id: 9,
     ordertypes: [
       {oldtype: 20, newtype: 51}, // A1
