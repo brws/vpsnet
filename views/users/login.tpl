@@ -6,10 +6,11 @@
     <label>Username</label>
     <select style="width: 100%; padding: 10px;" id="UserUsername" name="data[User][username]">
         {foreach from=$users item=user}
-          <option value="{$user.User.username}">{ucwords $user.User.firstname} {ucwords $user.User.surname}</option>
+          <option {if $user.User.username=="sd2"}selected="selected"{/} value="{$user.User.username}">{ucwords $user.User.firstname} {ucwords $user.User.surname}</option>
         {/}
     </select>
     </div>
+    {$form->input('locations', array(options=$locations style="width: 100%; padding: 10px;"))}
 {else}
     <div class="manualuser">
         {$form->input('username')}

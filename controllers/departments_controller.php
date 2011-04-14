@@ -18,7 +18,7 @@ class DepartmentsController extends AppController {
           $this->Department->create();
         }
         
-        $parts['location_id'] = $global == true ? 0 : $this->Session->read('Auth.User.location_id');
+        $parts['location_id'] = $global == true ? 0 : $this->location['id'];
         
         if (!empty($parts['name'])) {
           $this->Department->save($parts);

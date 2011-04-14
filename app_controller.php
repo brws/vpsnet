@@ -36,22 +36,19 @@ class AppController extends Controller {
   public $components = array('Auth', 'Session');
   public $helpers = array('User', 'Location', 'Session', 'Form', 'Role');
   public $uses = array('Location');
+  public $location;
   
   function beforeFilter() {
-    $location = $this->Session->read('Location');
+    $location = $this->Session->read('Auth.User.location_id');
+    $loverride = $this->Session->read('Loverride');
     
-    $user = $this->Auth->user();
-    
-    if ($user['User']['username'] == 'robin') {
-      Configure::write('debug', 3);
-    }
-    
-    if (empty($location)) {
-      $user = $this->Auth->user();
-      $location = $this->Location->find('first', array('recursive' => 0, 'conditions' => array('Location.id' => $user['User']['location_id'])));
-      if (!empty($location)) {
-        $this->Session->write('Location', $location['Location']);
-      }
+    if ($loverride && $location) {
+      $loca = $this->Session->read('Loverride.Location');
+      $this->location = $loca;
+    } else {
+      $loca = $this->Location->find('first', array('recursive' => 0, 'conditions' => array('Location.id' => $location)));
+      $this->Session->write('Loverride', $loca['Location']);
+      $this->location = $loca['Location'];
     }
     
     $this->set('params', $this->params);

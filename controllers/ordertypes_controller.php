@@ -16,7 +16,7 @@ class OrdertypesController extends AppController {
           $this->Ordertype->create();
         }
 
-        $parts['location_id'] = $global == true ? 0 : $this->Session->read('Auth.User.location_id');
+        $parts['location_id'] = $global == true ? 0 : $this->location['id'];
 
         if (!empty($parts['name'])) {
           $this->Ordertype->save($parts);
@@ -57,4 +57,3 @@ class OrdertypesController extends AppController {
     }
   }
 }
-

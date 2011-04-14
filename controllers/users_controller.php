@@ -16,16 +16,32 @@
 
       $dealer = explode('.', $_SERVER['HTTP_HOST']);
       $dealer = $dealer[0];
+      
+      $admins = $this->User->find('all', array('conditions' => array('User.role_id' => 1, 'User.active' => 1)));
+      
+      if ($dealer !== 'admin') {
+        $this->Location->recursive = -1;
+        $location = $this->Location->find('first', array('conditions' => array('Location.url' => $dealer)));
 
-      $this->Location->recursive = -1;
-      $location = $this->Location->find('first', array('conditions' => array('Location.url' => $dealer)));
-
-      $this->User->recursive = -1;
-      $users = $this->User->find('all', array('conditions' => array('User.active' => 1, 'User.location_id' => $location['Location']['id'])));
-      $this->set('users', $users);
+        $this->User->recursive = -1;
+        $users = $this->User->find('all', array('conditions' => array('User.active' => 1, 'User.location_id' => $location['Location']['id'])));
+        $this->set('users', $users);
+      } else {
+        $locations = $this->Location->find('list');
+        $users = $admins;
+        $this->set('users', $users);
+        $this->set('locations', $locations);
+      }
 
       if (!empty($this->data) && $this->Auth->user()) {
         $user = $this->Auth->user();
+        
+        if ($user['User']['role_id'] == 1 && isset($this->data['User']['locations'])) {
+          $this->Session->write('Loverride.location_id', $this->data['User']['locations']);
+          $loca = $this->Location->find('first', array('recursive' => 0, 'conditions' => array('Location.id' => $this->data['User']['locations'])));
+          $this->Session->write('Loverride', $loca);
+        }
+        
         $this->redirect($this->Auth->redirect());
       }
     }
@@ -71,7 +87,7 @@
 
     function add() {
       if (!empty($this->data)) {
-        $loc = $this->Session->read('Auth.User.location_id');
+        $loc = $this->location['id'];
         $username = $this->data['User']['firstname'][0] . $this->data['User']['surname'][0] . $loc;
 
         $find = $this->User->find('first', array('conditions' => array('User.username' => $username)));

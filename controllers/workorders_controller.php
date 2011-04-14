@@ -15,7 +15,7 @@ class WorkordersController extends AppController {
         'Workorder.datetime_required ASC'
       ),
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'or' => array(
           'or' => array(
             'Workorder.status_id >' => 2,
@@ -69,7 +69,7 @@ class WorkordersController extends AppController {
       $this->data['Car']['registration'] = str_replace(' ', '', strtoupper($this->data['Car']['registration']));
 
       $this->data['Workorder']['status_id'] = $status;
-      $this->data['Workorder']['location_id'] = $this->Session->read('Auth.User.location_id');
+      $this->data['Workorder']['location_id'] = $this->location['id'];
       $this->data['Workorder']['authorised_by_user_id'] = $this->Session->read('Auth.User.id');
 
       $this->data['Workorder']['datetime_required'] = $daten[2] . '-' . $daten[1] . '-' . $daten[0] . ' ' .
@@ -116,7 +116,7 @@ class WorkordersController extends AppController {
     $conditions = array(
       'conditions' => array(
         'or' => array(
-          array('location_id' => $this->Session->read('Auth.User.location_id')),
+          array('location_id' => $this->location['id']),
           array('location_id' => 0)
         ),
         'and' => array(
@@ -150,7 +150,7 @@ class WorkordersController extends AppController {
 
     $users = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.active' => 1
       )
     ));
@@ -170,7 +170,7 @@ class WorkordersController extends AppController {
 
     $vusers = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.role_id >=' => 4,
         'User.active' => 1
       )
@@ -305,7 +305,7 @@ class WorkordersController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
       ),
 
       'limit' => 50,
@@ -362,7 +362,7 @@ class WorkordersController extends AppController {
     $conditions = array(
       'conditions' => array(
         'or' => array(
-          array('location_id' => $this->Session->read('Auth.User.location_id')),
+          array('location_id' => $this->location['id']),
           array('location_id' => 0)
         ),
         'and' => array(
@@ -394,7 +394,7 @@ class WorkordersController extends AppController {
 
     $users = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id')
+        'User.location_id' => $this->location['id']
       )
     ));
 
@@ -508,7 +508,7 @@ class WorkordersController extends AppController {
       'recursive' => -1,
       'conditions' => array(
         'Ordertype.hidden NOT' => 1,
-        'Ordertype.location_id' => $this->Session->read('Auth.User.location_id')
+        'Ordertype.location_id' => $this->location['id']
       )
     ));
     
@@ -517,7 +517,7 @@ class WorkordersController extends AppController {
       'recursive' => -1,
       'conditions' => array(
         'Department.hidden NOT' => 1,
-        'Department.location_id' => $this->Session->read('Auth.User.location_id')
+        'Department.location_id' => $this->location['id']
       )
     ));
 
@@ -526,7 +526,7 @@ class WorkordersController extends AppController {
       'recursive' => -1,
       'conditions' => array(
         'Addon.hidden NOT' => 1,
-        'Addon.location_id' => $this->Session->read('Auth.User.location_id')
+        'Addon.location_id' => $this->location['id']
       )
     ));
         
@@ -535,7 +535,7 @@ class WorkordersController extends AppController {
       'recursive' => -1,
       'conditions' => array(
         'FixedCost.hidden NOT' => 1,
-        'FixedCost.location_id' => $this->Session->read('Auth.User.location_id')
+        'FixedCost.location_id' => $this->location['id']
       )
     ));
 

@@ -254,6 +254,11 @@ class OverviewController extends AppController {
     $this->layout = 'report';
     $this->all($y . '-' . $m . '-1', true);
   }
+
+  function custom_report($m, $y) {
+    $m = date('F', mktime(0,0,0,$m,1,$y));
+    $this->set(array('month' => $m, 'year' => $y));
+  }
   
   /*
   <option value="last_month">Last Month</option>
@@ -476,24 +481,22 @@ class OverviewController extends AppController {
           'Workorder.status_id' => 1,
           'DATE(Workorder.created)' => $date
         ),
-  					
+  			
         'limit' => 50,
       );
     }
-
     
-
     $this->User->recursive = -1;
-
+    
     $users = $this->User->find('all', array(
       'conditions' => array(
         'User.location_id' => $this->Session->read('Auth.User.location_id'),
         'User.active' => 1
       )
     ));
-
+    
     $tmpUsrs = array();
-
+    
     foreach ($users as $index => $user) {
       $tmpUsers[$user['User']['id']] = ucwords($user['User']['firstname'] . ' ' . $user['User']['surname']);
     }

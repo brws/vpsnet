@@ -49,6 +49,7 @@
   <div style="display: none;">
     {$form->input('Ordertype.1', array(type="select", options=$ordertypes, label="Work Order", empty="-- Select Workorder 2 --"))}
   </div>
+  {$form->input('Workorder.department_id')}
   {$form->input('Addon', array(label="Addons", multiple="checkbox"))}
   {include "../clever/calendar.tpl" label="Date Required" default_date="now" label2="Time Required" field="datetime_required" model="Workorder"}
   {if $role->atleast($role->VALET_ADMIN)}
@@ -72,10 +73,8 @@
 
 <div class="input step">
   <span class="title">Extra Instructions And Notes</span>
-  {$form->input('Workorder.department_id')}
   {$form->input('notes')}
 </div>
-
 
 {$form->submit('Add Work Order', array(id="submit"))}
 <div id="results">

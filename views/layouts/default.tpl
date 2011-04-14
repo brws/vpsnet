@@ -37,7 +37,7 @@
         <div id="summary">
           <span>
             {default $location->getJobsCountNow() 0} Job(s) in progress<br />
-            {default $location->getJobsCountToday() 0} Job(s) left today<br />
+            {default $location->getJobsCountToday() 0} Job(s) incomplete<br />
             {default $location->getJobsCountTomorrow() 0} Job(s) tomorrow<br />
           </span>
         </div>

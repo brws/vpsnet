@@ -18,7 +18,7 @@ class SettingsController extends AppController {
       'User.id' => $this->Session->read('Auth.User.id '))
     ));
 
-    $users = $this->User->find('all', array('conditions' => array('User.active' => isset($this->data['deactivated']) ? $this->data['deactivated'] == 1 ? 0 : 1 : 1, 'User.location_id' => $this->Session->read('Auth.User.location_id'))));
+    $users = $this->User->find('all', array('conditions' => array('User.active' => isset($this->data['deactivated']) ? $this->data['deactivated'] == 1 ? 0 : 1 : 1, 'User.location_id' => $this->location['id'])));
     $deac = $this->data['deactivated'];
     $data = $this->data = array_merge($location, $user);
     $this->data['deactivated'] = $deac;
@@ -27,7 +27,7 @@ class SettingsController extends AppController {
       'conditions' => array(
         'Department.hidden' => 0,
         'or' => array(
-          'Department.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Department.location_id' => $this->location['id'],
           'Department.location_id' => 0
         )
       )
@@ -49,7 +49,7 @@ class SettingsController extends AppController {
       'conditions' => array(
         'Department.hidden' => 0,
         'or' => array(
-          'Department.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Department.location_id' => $this->location['id'],
           'Department.location_id' => 0
         )
       )
@@ -74,7 +74,7 @@ class SettingsController extends AppController {
       'conditions' => array(
         'Department.hidden' => 0,
         'or' => array(
-          'Department.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Department.location_id' => $this->location['id'],
           'Department.location_id' => 0
         )
       )
