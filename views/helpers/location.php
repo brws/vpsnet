@@ -6,16 +6,24 @@ class LocationHelper extends AppHelper {
   
   function beforeRender() {
     $location = $this->Session->read('Auth.User.location_id');
-    $loverride = $this->Session->read('Loverride');
+    $loverride = $this->Session->read('Auth.Loverride');
     
-    if ($loverride && $location) {
-      $loca = $this->Session->read('Loverride.Location');
-      $this->location = $loca;
+    if (isset($loverride['id'])) {
+      $this->location = $this->Session->read('Auth.Loverride');
     } else {
-      $loca = $this->Location->find('first', array('recursive' => 0, 'conditions' => array('Location.id' => $location)));
-      // $this->Session->write('Loverride', $loca['Location']);
-      // You can not write to a Session from the view
-      $this->location = $loca['Location'];
+      if ($location > 0) {
+        if ($this->Session->check('Locations.'.$location)) {
+          $user_loc = $this->Session->read('Locations.' . $location);
+        } else {
+          $this->Location->id = $location;
+          $this->Location->recursive = -1;
+          $user_loc = $this->Location->read();
+        }
+        
+        if ($user_loc) {
+          $this->location = $user_loc['Location'];
+        }
+      }
     }
   }
 

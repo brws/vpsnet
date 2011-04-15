@@ -5,7 +5,7 @@
 
     function beforeFilter() {
       parent::beforeFilter();
-      $this->Auth->authError = "Please provide your login details to access VPSNet";
+      $this->Auth->authError = "Please provide your login details to access VPS Online";
       $this->Auth->autoRedirect = false;
       $this->Auth->loginRedirect = array('controller' => 'workorders', 'action' => 'index');
       $this->Auth->userScope = array('User.active' => true);
@@ -37,9 +37,10 @@
         $user = $this->Auth->user();
         
         if ($user['User']['role_id'] == 1 && isset($this->data['User']['locations'])) {
-          $this->Session->write('Loverride.location_id', $this->data['User']['locations']);
-          $loca = $this->Location->find('first', array('recursive' => 0, 'conditions' => array('Location.id' => $this->data['User']['locations'])));
-          $this->Session->write('Loverride', $loca);
+          $this->Location->id = $this->data['User']['locations'];
+          $this->Location->recursive = -1;
+          $user_loc = $this->Location->read();
+          $this->Session->write('Auth.Loverride', $user_loc['Location']);
         }
         
         $this->redirect($this->Auth->redirect());
@@ -47,6 +48,7 @@
     }
 
     function logout() {
+      $this->Session->delete('Auth.Loverride');
       $this->redirect($this->Auth->logout());
     }
 

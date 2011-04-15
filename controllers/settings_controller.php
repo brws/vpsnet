@@ -9,19 +9,20 @@ class SettingsController extends AppController {
     if ($this->RequestHandler->isAjax()) {
       $this->layout = 'ajax';
     }
-
-    $location = $this->Location->find('first', array('conditions' => array(
-      'Location.id' => $this->Session->read('Auth.User.location_id'))
-    ));
+    
+    $location = array('Location' => $this->location);
 
     $user = $this->User->find('first', array('conditions' => array(
-      'User.id' => $this->Session->read('Auth.User.id '))
+      'User.id' => $this->Session->read('Auth.User.id'))
     ));
 
     $users = $this->User->find('all', array('conditions' => array('User.active' => isset($this->data['deactivated']) ? $this->data['deactivated'] == 1 ? 0 : 1 : 1, 'User.location_id' => $this->location['id'])));
     $deac = $this->data['deactivated'];
-    $data = $this->data = array_merge($location, $user);
+    $this->data = array_merge($location, $user);
+    $this->data['Location'] = $this->location;
     $this->data['deactivated'] = $deac;
+    
+    $data = $this->data;
 
     $departments = $this->Department->find('list', array(
       'conditions' => array(
@@ -61,7 +62,8 @@ class SettingsController extends AppController {
       $roles = $this->Role->find('list', array('conditions' => array('Role.id > ' => 1)));
     }
 
-    $this->data = $data = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+    $data = $this->User->find('first', array('conditions' => array('User.id' => $id)));
+    $this->data = $data;
 
     $this->set(compact('departments', 'roles', 'data'));
     $this->render('ajax/user_edit');
