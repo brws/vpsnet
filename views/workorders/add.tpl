@@ -22,7 +22,7 @@
       for (var i = 0, len = $ordertypes.length; i < len; i++) {
 
         if (($this.val() !== $ordertypes[i][0]) || $ordertypes[i][0].length == 0) {
-          dropdowns.push('<option value="'+$ordertypes[i][0]+'">' +$ordertypes[i][1]+ '</value>');
+          dropdowns.push('<option value="' + $ordertypes[i][0] + '">' +$ordertypes[i][1]+ '</value>');
         }
       }
 
@@ -46,12 +46,16 @@
 <div class="input step">
   <span class="title">The Job</span>
   {$form->input('Ordertype.0', array(type="select", options=$ordertypes, label="Work Order", empty="-- Select Workorder 1 --"))}
+  
   <div style="display: none;">
     {$form->input('Ordertype.1', array(type="select", options=$ordertypes, label="Work Order", empty="-- Select Workorder 2 --"))}
   </div>
+  
   {$form->input('Workorder.department_id')}
   {$form->input('Addon', array(label="Addons", multiple="checkbox"))}
+  
   {include "../clever/calendar.tpl" label="Date Required" default_date="now" label2="Time Required" field="datetime_required" model="Workorder"}
+  
   {if $role->atleast($role->VALET_ADMIN)}
     {$form->input('Workorder.assigned_to_user_id', array(type="select", options=$vusers, label="Valeter working on Job"))}
   {/if}
@@ -80,4 +84,3 @@
 <div id="results">
 
 </div>
-

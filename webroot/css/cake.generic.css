@@ -731,7 +731,13 @@ div.step {
   clear: none;
 }
 
-.step .title {
+div.step2 {
+  width: 584px;
+  float: left;
+  clear: none;
+}
+
+.step .title, .step2 .title {
   background: #ccc;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
