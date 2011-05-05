@@ -10,9 +10,11 @@ class InvoiceController extends AppController {
     $location_id = $this->location['id'];
     $departments = $this->Department->find('all', array('conditions' => array('Department.hidden' => 0, 'or' => array(array('Department.location_id' => $location_id), array('Department.location_id' => 0))), 'recursive' => -1));
     $ordertypes = $this->Ordertype->find('all', array('conditions' => array('Ordertype.hidden' => 0, 'or' => array(array('Ordertype.location_id' => $location_id), array('Ordertype.location_id' => 0))), 'recursive' => -1));
-    $invoices = $this->Invoice->find('all');
+    $invoices = $this->Invoice->find('all', array('conditions' => array('Invoice.location_id' => $location_id, 'Invoice.year' => $y, 'Invoice.month' => $m)));
     
-    $this->set(compact('departments', 'ordertypes', 'invoices'));
+    $charges = $this->data['Charges'];
+    
+    $this->set(compact('departments', 'ordertypes', 'invoices', 'charges'));
     $this->set('month', $m);
     $this->set('year', $y);
   }
@@ -23,7 +25,8 @@ class InvoiceController extends AppController {
     if ($y == null) {
       
     } else {
-      
+      $this->layout = 'report';
+      $this->all($y . '-' . $m . '-1', true);
     }
   }
   

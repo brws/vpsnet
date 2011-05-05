@@ -1,0 +1,91 @@
+2011/04/05 16:50:51 [error] 4254#0: *1 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Exception' with message 'Could not write into /home/robin/dev/vpsnet/tmp/dwoo/compile/classpath.cache.d17.php, either because the folder is not there (create it) or because of the chmod configuration (please ensure this directory is writable by php), alternatively you can change the directory used with $dwoo->setCompileDir() or provide a custom loader object with $dwoo->setLoader()' in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Loader.php:88
+Stack trace:
+#0 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Loader.php(105): Dwoo_Loader->rebuildClassPathCache('/home/robin/dev...', '/home/robin/dev...')
+#1 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1018): Dwoo_Loader->loadPlugin('topLevelBlock')
+#2 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(704): Dwoo_Compiler->addBlock('topLevelBlock', Array, 0)
+#3 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Template/String.php(369): Dwoo_Compiler->compile(Object(Dwoo), Object(Dwoo_Template_File))
+#4 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo.php( in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Loader.php on line 88" while reading upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /users/login HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev"
+2011/04/05 16:58:12 [error] 5261#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 16:58:18 [error] 5279#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:50 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:52 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:52 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:53 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:53 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:53 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:01:53 [error] 5354#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:43 [error] 5467#0: *3 open() "/usr/share/phpmyadmin/phpmyadmin/print.css" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/print.css HTTP/1.1", host: "vpsnet.dev", referrer: "http://vpsnet.dev/phpmyadmin/index.php"
+2011/04/05 17:03:43 [error] 5467#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/logo_right.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/logo_right.png HTTP/1.1", host: "vpsnet.dev", referrer: "http://vpsnet.dev/phpmyadmin/index.php"
+2011/04/05 17:03:43 [error] 5467#0: *3 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/b_help.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/b_help.png HTTP/1.1", host: "vpsnet.dev", referrer: "http://vpsnet.dev/phpmyadmin/index.php"
+2011/04/05 17:03:43 [error] 5467#0: *5 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/s_warn.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/s_warn.png HTTP/1.1", host: "vpsnet.dev", referrer: "http://vpsnet.dev/phpmyadmin/index.php"
+2011/04/05 17:03:44 [error] 5467#0: *5 open() "/usr/share/phpmyadmin/phpmyadmin/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/favicon.ico HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:44 [error] 5467#0: *5 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/logo_right.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/logo_right.png HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:44 [error] 5467#0: *3 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/b_help.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/b_help.png HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:44 [error] 5467#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin/themes/original/img/s_warn.png" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin/themes/original/img/s_warn.png HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:47 [error] 5467#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:51 [error] 5467#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/05 17:03:51 [error] 5467#0: *1 open() "/usr/share/phpmyadmin/phpmyadmin" failed (2: No such file or directory), client: 127.0.0.1, server: vpsnet.dev, request: "GET /phpmyadmin HTTP/1.1", host: "vpsnet.dev"
+2011/04/11 13:22:18 [error] 2587#0: *3 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected '=' in /home/robin/dev/vpsnet/tmp/dwoo/compile/home/robin/dev/vpsnet/views/users/login.tpl.d17.php on line 21" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /users/login HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev"
+2011/04/11 13:25:10 [error] 2587#0: *17 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected ')' in /home/robin/dev/vpsnet/controllers/users_controller.php on line 20" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /users/login HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev"
+2011/04/13 16:06:04 [error] 1075#0: *1 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected T_ELSE, expecting T_FUNCTION in /home/robin/dev/vpsnet/app_controller.php on line 58" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev"
+2011/04/13 16:06:48 [error] 1075#0: *1 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected T_ELSE, expecting T_FUNCTION in /home/robin/dev/vpsnet/app_controller.php on line 58" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev"
+2011/04/14 13:25:20 [error] 1085#0: *244 FastCGI sent in stderr: "PHP Fatal error:  Call to a member function read() on a non-object in /home/robin/dev/vpsnet/app_helper.php on line 39" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/"
+2011/04/14 13:26:00 [error] 1085#0: *244 FastCGI sent in stderr: "PHP Fatal error:  Call to a member function read() on a non-object in /home/robin/dev/vpsnet/app_helper.php on line 40" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET / HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/"
+2011/04/18 14:56:12 [error] 1085#0: *1215 FastCGI sent in stderr: "PHP Fatal error:  Call to a member function find() on a non-object in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 11" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/users/login"
+2011/04/18 15:03:48 [error] 1085#0: *1227 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 7 in "file:/home/robin/dev/vpsnet/views/invoice/index.tpl" : Foreach <em>item</em> parameter must be of type string' in /home/robin/dev/vpsnet/vendors/dwoo/plugins/builtin/blocks/foreach.php:70
+Stack trace:
+#0 [internal function]: Dwoo_Plugin_foreach::postProcessing(Object(Dwoo_Compiler), Array, '', '', '?    ?      <?p...')
+#1 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1177): call_user_func(Array, Object(Dwoo_Compiler), Array, '', '', '?    ?      <?p...')
+#2 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1363): Dwoo_Compiler->removeTopBlock()
+#3 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(794): Dwoo_Compiler->parse('<div class="inp...', 163, NULL, false, 'root', 164)
+#4 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Template/String.php(369): Dwoo_Compiler->compile(Object(Dwoo), Object(Dwoo_Template_File))
+#5 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo.php(363): Dwoo_Template_String->getCompiledTemplate in /home/robin/dev/vpsnet/vendors/dwoo/plugins/builtin/blocks/foreach.php on line 70" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/users/login"
+2011/04/21 13:36:12 [error] 1097#0: *3671 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 4 in "file:/home/robin/dev/vpsnet/views/invoice/index.tpl" : Parse error in "<div class="department select">
+    <h3 style="font-size: 12pt; margin-top: 10px;">Select Departments</h3>
+    {foreach $departments department}
+      <div class="checkbox">
+        <input type="hidden" name="data[Department][{$department.Department.id}]" value="0" />
+        <input id="department{$department.Department.id}" {if $this->data[Department][$department.Department.id] == 1}checked="checked"{/} name="data[Department][{$department.Department.id}]" type="checkbox" value="1" />
+        <label for="department{$department.Department.id}" style="width: 17em;">{$department.Department.name}</label>
+      </div>
+    {/}
+  </div>
+  
+  <div style="clear: left;">&nbsp;</div>
+  
+  <div class="ordertype select">
+    <h3 style="font-size: 12pt; margin-top: 10px;">Work Order Types</h3>
+    {foreach $ordertypes ordertype}
+      <div class="checkbox">
+    in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php on line 1403" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/users/login"
+2011/04/21 16:03:23 [error] 1097#0: *4063 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 47 in "file:/home/robin/dev/vpsnet/views/invoice/index.tpl" : Parse error in "href:'/preview_invoice/{$month}/{$year}', iframe: true});
+      }
+      
+      return false;
+    });
+  });
+</script>
+
+<style type="text/css">
+  form input {
+    border: 1px solid #000;
+    width: 125px;
+    margin: 0;
+  }
+  
+  table td {
+    padding: 0 !important;
+  }
+</style>
+
+<div class="input step">
+  <span class="title">Create custom invoice</span>
+  {$form->create(null, array(url="/invoice/index/$month/$year"))}
+  {$form->input("name")}
+  <div class="department select">
+    <h3 style="font-size: 12pt; margin-top: 10px;">Select Departments</h3>
+    {foreach $departments department}
+      <div class="checkbox">
+        <input type="hidden" name="data[Department][{$department.Department.id}]" value="0" />
+        <input rel="{$department.Department.id}" class="dp" id="department{$department.Department.id}" {if $this->data[Department][$departmen in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php on line 1403" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "POST /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/invoice/index/4/2011"
+2011/04/21 16:08:42 [error] 1097#0: *4093 FastCGI sent in stderr: "PHP Fatal error:  Call to undefined method InvoiceController::setData() in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 110" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/preview_invoice/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/invoice/index/4/2011"

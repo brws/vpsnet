@@ -12,7 +12,7 @@ class LocationHelper extends AppHelper {
       $this->location = $this->Session->read('Auth.Loverride');
     } else {
       if ($location > 0) {
-        if ($this->Session->check('Locations.'.$location)) {
+        if ($this->Session->check('Locations.' . $location)) {
           $user_loc = $this->Session->read('Locations.' . $location);
         } else {
           $this->Location->id = $location;

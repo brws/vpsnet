@@ -100,7 +100,7 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Charge (£)</th>
+          <th>Charge (&pound;)</th>
         </tr>
       </thead>
       <tbody>
@@ -110,7 +110,7 @@
             <input rel="{$cid}" class="charge_name cn{$cid}" type="text" name="data[Charges][{$cid}][name]" value="{$charge.name}" />
           </td>
           <td>
-            <input rel="{$cid}" class="charge_value cv{$cid}" type="text" name="data[Charges][{$cid}][value]" value="{$charge.id}" />
+            <input rel="{$cid}" class="charge_value cv{$cid}" type="text" name="data[Charges][{$cid}][value]" value="{$charge.value}" />
           </td>
         </tr>
       {else}
@@ -139,9 +139,13 @@
   <div class="invoices select">
     <h3 style="font-size: 12pt; margin-top: 10px;">Saved Invoices</h3>
     <table>
+      <thead>
+        <tr><th>Invoice Name</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
     {foreach $invoices invoice}
       <tr>
-        <td></td>
+        <td>{$invoice.Invoice.name}</td>
         <td><button onclick="location.href='/invoice/print_invoice/{$invoice.Invoice.id}';">Print</button></td>
       </tr>
     {else}
@@ -149,6 +153,7 @@
         <td colspan="2">No custom invoices</td>
       </tr>
     {/}
+    </tbody>
     </table>
   </div>
 </div>

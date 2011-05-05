@@ -61,6 +61,16 @@ class AppController extends Controller {
       }
     }
     
+    if ($this->Session->check('Auth.User.id')) {
+      $userid = $this->Session->read('Auth.User.id');
+      $active = $this->User->read('active', $userid);
+      
+      if ($active['User']['active'] == 0) {
+        $this->Session->del('Auth');
+        $this->redirect('/users/logout', 301, true);
+      }
+    }
+    
     $this->set('params', $this->params);
   }
 }
