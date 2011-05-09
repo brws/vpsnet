@@ -168,23 +168,23 @@ class InvoiceController extends AppController {
       unset($result['Uncategorized']);
     }
     
-    $days_in_month = cal_days_in_month(0, $month, $year);
-    $weeks_in_month = $days_in_month / 7;
-    
-    foreach ($fixedcosts as $index => $cost) {
-      if ($fixedcosts[$index]['FixedCost']['period'] == 'weekly') {
-        $fixedcosts[$index]['FixedCost']['charge'] *= $weeks_in_month; 
-        $fixedcosts[$index]['FixedCost']['cost'] *= $weeks_in_month;
-      }
-      
-      if ($fixedcosts[$index]['FixedCost']['period'] == 'daily') {
-        $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
-        $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
-      }
-
-      $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
-      $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
-    }
+    // $days_in_month = cal_days_in_month(0, $month, $year);
+    // $weeks_in_month = $days_in_month / 7;
+    // 
+    // foreach ($fixedcosts as $index => $cost) {
+    //   if ($fixedcosts[$index]['FixedCost']['period'] == 'weekly') {
+    //     $fixedcosts[$index]['FixedCost']['charge'] *= $weeks_in_month; 
+    //     $fixedcosts[$index]['FixedCost']['cost'] *= $weeks_in_month;
+    //   }
+    //   
+    //   if ($fixedcosts[$index]['FixedCost']['period'] == 'daily') {
+    //     $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
+    //     $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
+    //   }
+    // 
+    //   $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
+    //   $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
+    // }
     
     $total = array(
       'workorder_co' => 0,
