@@ -1,17 +1,26 @@
 <table border="0" id="front" cellspacing="0" cellpadding="5">
-  <caption>VPS Online Report - {$month}/{$year}</caption>
+  <caption>VPS Online Report - {$month}/{$year} - {$invname}</caption>
   <thead>
     <tr>
       <th>Authorised By</th><th>Work Order</th><th>Addon</th>
-      <th>Car</th><th>Date Required</th>
+      <th width="150">Car</th><th>Date Required</th>
       <th>Date Created</th><th>Workorder Charges</th><th>Addon Charges</th><th>Total Charge</th>
     </tr>
   </thead>
-  <tbody>
+  
     {$totalcost=0}
     {$totalcharge=0}
+    {foreach from=$result item=orty key=dept}
+    <thead>
+      <tr><th colspan="9" style="background: #000; color: #fff">{$dept}</th></tr>
+    </thead>
+    {foreach from=$orty item=workorders key=name}
+    <thead>
+      <tr><th colspan="9">{$name}</th></tr>
+    </thead>
     {foreach from=$workorders item=workorder}
-      <tr class="{cycle values=array("odd", "even")} {if strtotime($workorder.Workorder.datetime_required) < strtotime('now')}overdue{/if} color{$workorder.Workorder.status_id}">
+      <tbody>
+      <tr class="{cycle values=array("odd", "even")}">
         <td>{ucwords $workorder.AuthorisedByUser.firstname} {ucwords $workorder.AuthorisedByUser.surname}</td>
         <td>{foreach from=$workorder.Ordertype item=ordertype}
           {$ordertype.name}<br />
@@ -19,7 +28,19 @@
             No Work Order Listed
           {/foreach}
         </td>
-        <td>{assign var=addonl value=""}{foreach from=$workorder.Addon item=addon}{assign var=addons value="YES"}{assign var=addonl value=$addonl|cat:$addon.name}{if !$dwoo.foreach.default.last}{assign var=addonl value=$addonl|cat:", "}{/if}{else}{assign var=addons value="NO"}{/}<span>{$addons}: {$addonl}</span>
+        <td>
+          {assign var=addonl value=""}
+          
+          {foreach from=$workorder.Addon item=addon}
+            {assign var=addons value="YES"}
+            {assign var=addonl value=$addonl|cat:$addon.name}
+            {if !$dwoo.foreach.default.last}
+              {assign var=addonl value=$addonl|cat:", "}
+            {/if}
+          {else}
+            {assign var=addons value="NO"}
+          {/}
+          <span>{$addons}: {$addonl}</span>
         </td>
         <td><strong>{if $workorder.Car.registration}{$workorder.Car.registration}{else}{$workorder.Car.chassis}{/if}</strong>, {$workorder.Car.colour}<br />
         {$workorder.Car.make} {$workorder.Car.variant}</td>
@@ -44,10 +65,15 @@
       {$totalcost+=$acost}
       {$totalcharge+=$charge}
       {$totalcharge+=$acharge}
-    {/foreach}
+</tbody>
+   {/foreach}
+   {/foreach}
+   {/foreach}
   </tbody>
+  {if $show_charges == 1}
+  
   <thead>
-    <th colspan="9" align="left">Fixed Costs</th>
+    <th colspan="9" align="left">Fixed Costs {$show_charges}</th>
   </thead>
   <tbody>
     {foreach from=$fixedcosts item=cost}
@@ -78,6 +104,7 @@
       {/}
     {/}
   </tbody>
+  {/}
   <thead>
     <tr>
       <th colspan="7">&nbsp;</th>

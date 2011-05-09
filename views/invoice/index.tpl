@@ -9,13 +9,22 @@
       return null;
     }
     
+    var err = true;
+    
     jQuery('.ordertype input.ot').each(function() {
       preview += 'ordertypes['+jQuery(this).attr('rel')+']='+jQuery(this).attr('checked')+'&';
+      if (jQuery(this).attr('checked') == 1) err = false;
     });
     
     jQuery('.department input.dp').each(function() {
       preview += 'departments['+jQuery(this).attr('rel')+']='+jQuery(this).attr('checked')+'&';
+      if (jQuery(this).attr('checked') == 1) err = false;
     });
+    
+    if (err == true) {
+      alert('Please select an ordertype or department');
+      return null;
+    }
     
     var err = false;
     jQuery('.custom_charges .charge_name').each(function() {      
@@ -31,10 +40,12 @@
     
     if (err == true) {
       alert('Please ensure all entered charges have names');
-      return false;
+      return null;
     }
     
-    preview += 'name='+jQuery('#InvoiceName').val();
+    preview += 'name='+jQuery('#InvoiceName').val()+'&';
+    
+    preview += 'show_charges='+(jQuery('#InvoiceShowCharges').attr('checked') == true ? 1 : 0);
     
     return preview;
   }
@@ -48,6 +59,11 @@
       }
       
       return false;
+    });
+    
+    jQuery('#create').click(function() {
+      var preview = update_preview();
+      return preview != null;
     });
   });
 </script>
@@ -127,10 +143,19 @@
       {/}
       </tbody>
     </table>
+    
+  </div>  
+  <div class="invoice select">
+  <div class="checkbox">
+    <input type="hidden" name="data[Invoice][show_charges]" value="0" />
+    <input id="InvoiceShowCharges" {if $this->data[Invoice][show_charges] == 1}checked="checked"{else}{if !isset($this->data)}checked="checked"{/}{/} name="data[Invoice][show_charges]" type="checkbox" value="1" />
+    <label for="InvoiceShowCharges" style="width: 20em;">Show Charges / Fixed Costs on Invoice</label>
   </div>
+  </div>
+  
   <div class="input submit">
     {$form->button('Preview', array(id="preview", name="data[Preview]", value="true"))}
-    {$form->button('Create', array(name="data[Create]", value="true"))}
+    {$form->button('Create', array(id="create", name="data[Create]", value="true"))}
   </div>
 </div>
 
@@ -145,8 +170,11 @@
       <tbody>
     {foreach $invoices invoice}
       <tr>
-        <td>{$invoice.Invoice.name}</td>
-        <td><button onclick="location.href='/invoice/print_invoice/{$invoice.Invoice.id}';">Print</button></td>
+        <td width="400">{$invoice.Invoice.name}</td>
+        <td style="text-align: center;">
+          <button onclick="location.href='/invoice/print_invoice/{$invoice.Invoice.id}'; return false;">Print</button>
+          <button onclick="location.href='/invoice/delete_invoice/{$invoice.Invoice.id}'; return false;">Delete</button>
+        </td>
       </tr>
     {else}
       <tr>

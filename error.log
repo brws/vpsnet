@@ -89,3 +89,46 @@ Stack trace:
         <input type="hidden" name="data[Department][{$department.Department.id}]" value="0" />
         <input rel="{$department.Department.id}" class="dp" id="department{$department.Department.id}" {if $this->data[Department][$departmen in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php on line 1403" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "POST /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/invoice/index/4/2011"
 2011/04/21 16:08:42 [error] 1097#0: *4093 FastCGI sent in stderr: "PHP Fatal error:  Call to undefined method InvoiceController::setData() in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 110" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/preview_invoice/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "admin.vpsnet.dev", referrer: "http://admin.vpsnet.dev/invoice/index/4/2011"
+2011/05/06 10:13:27 [error] 1097#0: *44074 FastCGI sent in stderr: "PHP Fatal error:  Call to undefined method SessionComponent::flash() in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 35" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "POST /invoice/index/4/2011 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
+2011/05/06 11:49:09 [error] 1097#0: *44162 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected ';' in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 72" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/print_invoice/4 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
+2011/05/06 16:43:58 [error] 1097#0: *44237 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 15 in "file:/home/robin/dev/vpsnet/views/invoice/print_invoice.tpl" : Parse error in "*}
+      <tr class="{cycle values=array("odd", "even")}">
+        <td>{ucwords $workorder.AuthorisedByUser.firstname} {ucwords $workorder.AuthorisedByUser.surname}</td>
+        <td>{foreach from=$workorder.Ordertype item=ordertype}
+          {$ordertype.name}<br />
+            {foreachelse}
+            No Work Order Listed
+          {/foreach}
+        </td>
+        <td>
+          {assign var=addonl value=""}
+          
+          {foreach from=$workorder.Addon item=addon}
+            {assign var=addons value="YES"}
+            {assign var=addonl value=$addonl|cat:$addon.name}
+            {if !$dwoo.foreach.default.last}
+              {assign var=addonl value=$addonl|cat:", "}
+            {/if}
+          {else}
+            {assign var=addons value="NO"}
+          {/}
+          <span>{$addons}: {$addonl}</span>
+         in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php on line 1403" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/print_invoice/4 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
+2011/05/06 16:44:40 [error] 1097#0: *44237 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 81 in "file:/home/robin/dev/vpsnet/views/invoice/print_invoice.tpl" : Syntax malformation, a block of type "foreach" was closed but was not opened' in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php:1106
+Stack trace:
+#0 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1366): Dwoo_Compiler->removeBlock('foreach')
+#1 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(794): Dwoo_Compiler->parse('<table border="...', 2908, NULL, false, 'root', 2916)
+#2 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Template/String.php(369): Dwoo_Compiler->compile(Object(Dwoo), Object(Dwoo_Template_File))
+#3 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo.php(363): Dwoo_Template_String->getCompiledTemplate(Object(Dwoo), NULL)
+#4 /home/robin/dev/vpsnet/views/dwoo.php(140): Dwoo->get(Object(Dwoo_Template_File), Array)
+#5 /var/cake/libs/view/view.php(400): DwooView->_render('/home/robin/dev...', Array)
+#6 /var/cake/libs/controller/controller.php( in /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php on line 1106" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/print_invoice/4 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
+2011/05/09 16:13:22 [error] 1097#0: *44388 FastCGI sent in stderr: "PHP Parse error:  syntax error, unexpected '{' in /home/robin/dev/vpsnet/controllers/invoice_controller.php on line 218" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/print_invoice/7 HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
+2011/05/09 16:20:33 [error] 1097#0: *44395 FastCGI sent in stderr: "PHP Fatal error:  Uncaught exception 'Dwoo_Compilation_Exception' with message 'Compilation error at line 85 in "file:/home/robin/dev/vpsnet/views/invoice/print_invoice.tpl" : Foreach <em>item</em> parameter must be of type string' in /home/robin/dev/vpsnet/vendors/dwoo/plugins/builtin/blocks/foreach.php:70
+Stack trace:
+#0 [internal function]: Dwoo_Plugin_foreach::postProcessing(Object(Dwoo_Compiler), Array, '', '', '??    <?php ?$_...')
+#1 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1094): call_user_func(Array, Object(Dwoo_Compiler), Array, '', '', '??    <?php ?$_...')
+#2 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(1366): Dwoo_Compiler->removeBlock('foreach')
+#3 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Compiler.php(794): Dwoo_Compiler->parse('<table border="...', 3029, NULL, false, 'root', 3037)
+#4 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo/Template/String.php(369): Dwoo_Compiler->compile(Object(Dwoo), Object(Dwoo_Template_File))
+#5 /home/robin/dev/vpsnet/vendors/dwoo/Dwoo.php(363): Dwoo_Template_String->ge in /home/robin/dev/vpsnet/vendors/dwoo/plugins/builtin/blocks/foreach.php on line 70" while reading response header from upstream, client: 127.0.0.1, server: vpsnet.dev, request: "GET /invoice/preview_invoice/4/2011?ordertypes[44]=true&ordertypes[45]=true&ordertypes[46]=true&ordertypes[47]=true&ordertypes[48]=true&ordertypes[49]=true&departments[33]=true&departments[34]=true&departments[35]=true&departments[38]=true&ccnames[0]=Test5&ccnames[1]=&ccnames[2]=&ccnames[3]=&ccnames[4]=&ccnames[5]=&ccvalues[0]=1234&ccvalues[1]=&ccvalues[2]=&ccvalues[3]=&ccvalues[4]=&ccvalues[5]=&name=Test HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "vpsnet.dev", referrer: "http://vpsnet.dev/invoice/index/4/2011"
