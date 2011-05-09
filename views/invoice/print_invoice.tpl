@@ -78,29 +78,10 @@
   <tbody>
     {foreach from=$fixedcosts item=cost}
       {if $cost.FixedCost.hidden == 0}
-        {$days=cal_days_in_month(0, $month, $year)}
-        
-        {$origcharge=$cost.FixedCost.charge}
-      
-        {if $cost.FixedCost.period == 'weekly'}
-          {$weeks=$days/7}
-          {$cost.FixedCost.charge=$cost.FixedCost.charge*$weeks}
-          {$cost.FixedCost.cost=$cost.FixedCost.cost*$weeks}
-        {/if}
-        
-        {if $cost.FixedCost.period == 'daily'}
-          {$cost.FixedCost.charge=$cost.FixedCost.charge*$days}
-          {$cost.FixedCost.cost=$cost.FixedCost.cost*$days}
-        {/if}
-        
-        {$cost.FixedCost.charge=$cost.FixedCost.charge*$cost.FixedCost.timesperperiod}
-        {$cost.FixedCost.cost=$cost.FixedCost.cost*$cost.FixedCost.timesperperiod}
         <tr>
           <td colspan="7">&nbsp;{$cost.FixedCost.name} ({$cost.FixedCost.period})</td>
           <td>{if $role->atleast($role->VALET_ADMIN)}&pound;{number_format $cost.FixedCost.cost 2}{else}-{/}</td><td class="right">&pound;{number_format $cost.FixedCost.charge 2}</td>
         </tr>
-        {$totalcost+=$cost.FixedCost.cost}
-        {$totalcharge+=$cost.FixedCost.charge}
       {/}
     {/}
   </tbody>
