@@ -17,6 +17,8 @@
       $dealer = explode('.', $_SERVER['HTTP_HOST']);
       $dealer = $dealer[0];
       
+      $this->set('dealer', $dealer);
+      
       $admins = $this->User->find('all', array('conditions' => array('User.role_id' => 1, 'User.active' => 1)));
       
       if ($dealer !== 'admin') {

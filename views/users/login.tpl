@@ -10,7 +10,9 @@
         {/}
     </select>
     </div>
-    {$form->input('locations', array(options=$locations style="width: 100%; padding: 10px;"))}
+    {if $dealer == 'admin'}
+      {$form->input('locations', array(options=$locations style="width: 100%; padding: 10px;"))}
+    {/}
 {else}
     <div class="manualuser">
         {$form->input('username')}
