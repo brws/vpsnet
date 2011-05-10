@@ -1,6 +1,6 @@
 <table border="0" id="front" cellspacing="0" cellpadding="5">
   <caption>VPS Online Report - {$month}/{$year} - {$invname}<br />
-    <span style="color: #888">Printed {date_format $.now "%d-%m-%Y %H:%M:%S"}</span>
+    <span style="color: #888">Generated on {date_format $.now "%d-%m-%Y at %H:%M:%S"}</span>
   </caption>
   <thead>
     <tr>
