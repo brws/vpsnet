@@ -40,7 +40,11 @@
           {else}
             {assign var=addons value="NO"}
           {/}
-          <span>{$addons}: {$addonl}</span>
+          {if $addons == "YES"}
+            <span>{$addonl}</span>
+          {else}
+            <span style="color: #888">N/A</span>
+          {/}
         </td>
         <td><strong>{if $workorder.Car.registration}{$workorder.Car.registration}{else}{$workorder.Car.chassis}{/if}</strong>, {$workorder.Car.colour}<br />
         {$workorder.Car.make} {$workorder.Car.variant}</td>
