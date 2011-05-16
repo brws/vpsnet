@@ -32,6 +32,11 @@
 
       table td.right {
         border-right: 1px solid #ccc;
+        text-align: right;
+      }
+      
+      table td.money {
+        text-align: right;
       }
     </style>
   </head>

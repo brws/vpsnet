@@ -168,24 +168,6 @@ class InvoiceController extends AppController {
       unset($result['Uncategorized']);
     }
     
-    // $days_in_month = cal_days_in_month(0, $month, $year);
-    // $weeks_in_month = $days_in_month / 7;
-    // 
-    // foreach ($fixedcosts as $index => $cost) {
-    //   if ($fixedcosts[$index]['FixedCost']['period'] == 'weekly') {
-    //     $fixedcosts[$index]['FixedCost']['charge'] *= $weeks_in_month; 
-    //     $fixedcosts[$index]['FixedCost']['cost'] *= $weeks_in_month;
-    //   }
-    //   
-    //   if ($fixedcosts[$index]['FixedCost']['period'] == 'daily') {
-    //     $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
-    //     $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
-    //   }
-    // 
-    //   $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
-    //   $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
-    // }
-    
     $total = array(
       'workorder_co' => 0,
       'workorder_ch' => 0,
@@ -235,6 +217,24 @@ class InvoiceController extends AppController {
         'period' => 'one-off'
       ));
     }
+
+    $days_in_month = cal_days_in_month(0, $month, $year);
+    $weeks_in_month = $days_in_month / 7;
+    
+    foreach ($fixedcosts as $index => $cost) {
+      if ($fixedcosts[$index]['FixedCost']['period'] == 'weekly') {
+        $fixedcosts[$index]['FixedCost']['charge'] = $fixedcosts[$index]['FixedCost']['charge'] * $weeks_in_month; 
+        $fixedcosts[$index]['FixedCost']['cost'] = $fixedcosts[$index]['FixedCost']['cost'] * $weeks_in_month;
+      }
+      
+      if ($fixedcosts[$index]['FixedCost']['period'] == 'daily') {
+        $fixedcosts[$index]['FixedCost']['charge'] *= $days_in_month; 
+        $fixedcosts[$index]['FixedCost']['cost'] *= $days_in_month;
+      }
+
+      $fixedcosts[$index]['FixedCost']['charge'] *= $fixedcosts[$index]['FixedCost']['timesperperiod'];
+      $fixedcosts[$index]['FixedCost']['cost'] *= $fixedcosts[$index]['FixedCost']['timesperperiod'];
+    }
     
     foreach ($fixedcosts as $fixedcost) {
       if (isset($fixedcost['FixedCost'])) {
@@ -242,9 +242,22 @@ class InvoiceController extends AppController {
         $total['fixedcost_ch'] += $fixedcost['FixedCost']['charge'];
       }
     }
+
+    $all = $total['workorder_ch'] + $total['fixedcost_ch'];
+    $jwo = $total['workorder_ch'];
+    
+    $tvat = $vat;
+    
+    $vat = $vat['VAT']['value'] / 100;
+
+    $total['vat_on_all'] = $all*$vat;
+    $total['all_with_vat'] = ($all*$vat) + $all;
+    
+    $total['vat_on_jwo'] = $jwo*$vat;
+    $total['jwo_with_vat'] = ($jwo*$vat) + $jwo;
     
     $this->set(array(
-      'vat' => $vat['VAT']['value'],
+      'vat' => $tvat['VAT']['value'],
       'month' => $month,
       'year' => $year,
       'start' => 1,
