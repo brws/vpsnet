@@ -58,6 +58,13 @@
           {$cost+=$ordertype.cost}
           {$charge+=$ordertype.charge}
         {/}<td class="money">&pound;{number_format $charge 2}</td>
+        
+        {$acost=0}
+        {$acharge=0}
+        {foreach from=$workorder.Addon item=addon}
+          {$acost+=$addon.cost}
+          {$acharge+=$addon.charge}
+        {/}
 
         <td class="money">&pound;{number_format $acharge 2}</td>
         <td class="right">&pound;{number_format $charge+$acharge 2}</td>
