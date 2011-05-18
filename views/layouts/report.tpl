@@ -41,7 +41,7 @@
     </style>
   </head>
   <body>
-    {if $role->atleast($role->VALET_ADMIN)}
+    {if $role->atleast($role->DEALER_ADMIN)}
       {$content_for_layout}
     {else}
       You are not authorised to access this system.
