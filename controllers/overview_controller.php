@@ -29,7 +29,7 @@ class OverviewController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'Workorder.status_id' => 1
       ),
 
@@ -73,7 +73,7 @@ class OverviewController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'Workorder.status_id' => 1
       ),
 
@@ -106,7 +106,7 @@ class OverviewController extends AppController {
 
     // show monthly statements, work order counts and costings, with a "complete list" button
 
-    $users = $this->User->find('list', array('conditions' => array('User.location_id' => $this->Session->read('Auth.User.location_id'))));
+    $users = $this->User->find('list', array('conditions' => array('User.location_id' => $this->location['id'])));
     $this->set('users', $users);
 
     $this->set('workorders', $workorders);
@@ -118,7 +118,7 @@ class OverviewController extends AppController {
     $conditions = array(
       'conditions' => array(
         'or' => array(
-          array('location_id' => $this->Session->read('Auth.User.location_id')),
+          array('location_id' => $this->location['id']),
           array('location_id' => 0)
         ),
         'and' => array(
@@ -161,7 +161,7 @@ class OverviewController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'MONTH(Workorder.created)' => $m,
         'YEAR(Workorder.created)' => $y,
         'Workorder.status_id' => 1
@@ -210,7 +210,7 @@ class OverviewController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'MONTH(Workorder.created)' => $m,
         'YEAR(Workorder.created)' => $y,
         'Workorder.status_id' => 1
@@ -302,7 +302,7 @@ class OverviewController extends AppController {
 
     $vusers = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.role_id >=' => 4,
         'User.active' => 1
       )
@@ -339,7 +339,7 @@ class OverviewController extends AppController {
       ),
 
       'conditions' => array(
-        'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+        'Workorder.location_id' => $this->location['id'],
         'Workorder.status_id' => 1,
         'DATE(Workorder.created)' => $extra
       ),
@@ -385,7 +385,7 @@ class OverviewController extends AppController {
     $conditions = array(
       'conditions' => array(
         'or' => array(
-          array('location_id' => $this->Session->read('Auth.User.location_id')),
+          array('location_id' => $this->location['id']),
           array('location_id' => 0)
         ),
         'and' => array(
@@ -409,7 +409,7 @@ class OverviewController extends AppController {
 
     $users = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.active' => 1
       )
     ));
@@ -462,7 +462,7 @@ class OverviewController extends AppController {
         ),
   
         'conditions' => array(
-          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.location_id' => $this->location['id'],
           'Workorder.status_id' => 1,
           'MONTH(Workorder.created)' => $dater[1],
           'YEAR(Workorder.created)' => $dater[0],
@@ -477,7 +477,7 @@ class OverviewController extends AppController {
         ),
   
         'conditions' => array(
-          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.location_id' => $this->location['id'],
           'Workorder.status_id' => 1,
           'DATE(Workorder.created)' => $date
         ),
@@ -490,7 +490,7 @@ class OverviewController extends AppController {
     
     $users = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.active' => 1
       )
     ));
@@ -513,7 +513,7 @@ class OverviewController extends AppController {
 
     $this->set('workorders', $workorders);
     
-    $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->Session->read('Auth.User.location_id'))));
+    $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->location['id'])));
     $this->set('fixedcosts', $fixedcosts);
     
         $vat = $this->VAT->find('first', array('conditions' => array('VAT.id' => 1))); 

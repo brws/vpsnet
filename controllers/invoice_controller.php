@@ -344,7 +344,7 @@ class InvoiceController extends AppController {
         ),
   
         'conditions' => array(
-          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.location_id' => $this->location['id'],
           'Workorder.status_id' => 1,
           'MONTH(Workorder.created)' => $dater[1],
           'YEAR(Workorder.created)' => $dater[0],
@@ -359,7 +359,7 @@ class InvoiceController extends AppController {
         ),
   
         'conditions' => array(
-          'Workorder.location_id' => $this->Session->read('Auth.User.location_id'),
+          'Workorder.location_id' => $this->location['id'],
           'Workorder.status_id' => 1,
           'DATE(Workorder.created)' => $date
         ),
@@ -372,7 +372,7 @@ class InvoiceController extends AppController {
     
     $users = $this->User->find('all', array(
       'conditions' => array(
-        'User.location_id' => $this->Session->read('Auth.User.location_id'),
+        'User.location_id' => $this->location['id'],
         'User.active' => 1
       )
     ));
@@ -394,7 +394,7 @@ class InvoiceController extends AppController {
 
     $this->set('workorders', $workorders);
     
-    $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->Session->read('Auth.User.location_id'))));
+    $fixedcosts = $this->FixedCost->find('all', array('conditions' => array('FixedCost.location_id' => $this->location['id'])));
     $this->set('fixedcosts', $fixedcosts);
     
     $vat = $this->VAT->find('first', array('conditions' => array('VAT.id' => 1))); 
@@ -406,7 +406,7 @@ class InvoiceController extends AppController {
     $conditions = array(
       'conditions' => array(
         'or' => array(
-          array('location_id' => $this->Session->read('Auth.User.location_id')),
+          array('location_id' => $this->location['id']),
           array('location_id' => 0)
         ),
         'and' => array(
