@@ -85,9 +85,25 @@ class InvoiceController extends AppController {
       $this->invoice($m, $y);
     }
   }
+
+  function csv($m, $y) {
+    Configure::write('debug', 0);
+    
+    header("Cache-Control: public");
+    header("Content-Description: File Transfer");
+    header("Content-Disposition: attachment; filename=vps-csvexport-$m-$y.csv");
+    header("Content-Type: text/csv; charset=UTF-8");
+    header("Content-Transfer-Encoding: binary");
+    
+    $this->layout = 'csv';
+    $this->invoice($m, $y, null, null, null, null, 1, false);
+    $this->render('csv');
+  }
   
-  function invoice($month, $year, $ordertypes = null, $departments = null, $charges = null, $name = null, $show_charges = 0) {
-    $this->layout = 'report';
+  function invoice($month, $year, $ordertypes = null, $departments = null, $charges = null, $name = null, $show_charges = 0, $render = true) {
+    if ($render == true) {
+      $this->layout = 'report';
+    }
     $this->autoRender = false;
     $location_id = $this->location['id'];
     $vat = $this->VAT->find('first', array('conditions' => array('VAT.id' => 1)));
@@ -269,7 +285,7 @@ class InvoiceController extends AppController {
       'fixedcosts' => $fixedcosts
     ));
     
-    $this->render('print_invoice');
+    if ($render == true) $this->render('print_invoice');
   }
 
   function preview_invoice($m, $y) {
