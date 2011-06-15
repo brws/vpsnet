@@ -1,3 +1,5 @@
+<div style="width: 21cm; text-align: right">VPS Valeting VAT No 7938 64862</div>
+<br />
 <table border="0" id="front" cellspacing="0" cellpadding="5">
   <caption>VPS Online Report - {$month}/{$year} - {$invname}<br />
     <span style="color: #888">Generated on {date_format $.now "%d-%m-%Y at %H:%M:%S"}</span>
@@ -150,3 +152,5 @@
     </tr>
   </tbody>
 </table>
+<br />
+<div style="width: 21cm; text-align: right">VPS Valeting VAT No 7938 64862</div>
